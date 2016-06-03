@@ -24,6 +24,8 @@ class ConfigurationController {
 		if(params?.invalidCrentials) {
 			flash.message = "Invalid Credentials"
 		}
+		
+		render(view: "login")
 	}
 	
 	/**
@@ -56,7 +58,10 @@ class ConfigurationController {
     }
 
     @Transactional
-    def save(Configuration configurationInstance) {
+    def save() {
+		
+		Configuration configurationInstance = new Configuration(params)
+		
         if (configurationInstance == null) {
             notFound()
             return
